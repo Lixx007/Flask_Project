@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RogueSecurity</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://t4.ftcdn.net/jpg/02/00/68/69/240_F_200686978_xUZgMeJv0Rj8a98jbfeHci8slCU8RdHF.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 25px;
+            max-width: 600px;
+            width: 90%;
+            margin: 60px auto;
+            border-radius: 15px;
+            box-shadow: 0 0 15px #00ffd5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ffd5;
+            font-size: 28px;
+        }
+
+        label {
+            font-size: 16px;
+            display: block;
+            margin: 12px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #00ffd5;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #00c9aa;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* 📱 Responsive Design for Mobile */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                margin: 30px auto;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            label {
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RogueSecurity</h1>
+
+        <!-- URL Scan -->
+        <form method="POST" action="/predict">
+            <label for="url">Enter URL to scan:</label>
+            <input type="text" name="url" id="url" placeholder="http://example.com" required>
+            <button type="submit">Scan URL</button>
+        </form>
+
+        <!-- File Scan -->
+        <form method="POST" action="/scam" enctype="multipart/form-data">
+            <label for="file">Upload PDF or TXT file:</label>
+            <input type="file" name="file" id="file" accept=".pdf, .txt" required>
+            <button type="submit">Scan File</button>
+        </form>
+
+        {% if message %}
+            <div class="result">{{ message }}</div>
+        {% endif %}
+        {% if predicted_class %}
+            <div class="result">{{ predicted_class }}</div>
+        {% endif %}
+        {% if input_url %}
+            <div class="result">Scanned URL: {{ input_url }}</div>
+        {% endif %}
+    </div>
+
+    <footer>
+        © 2025 RogueSecurity. All Rights Reserved. | Developed by Team Unpatched
+    </footer>
+</body>
+</html>
